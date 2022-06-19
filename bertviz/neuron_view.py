@@ -130,13 +130,13 @@ def get_attention(model, model_type, tokenizer, sentence_a, sentence_b=None, inc
 
     #if model_type not in ('bert', 'gpt2', 'xlnet', 'roberta'):
     #    raise ValueError("Invalid model type:", model_type)
-    #if not sentence_a:
-    #    raise ValueError("Sentence A is required")
-    #is_sentence_pair = bool(sentence_b)
-    #if is_sentence_pair and model_type not in ('bert', 'roberta', 'xlnet'):
-    #    raise ValueError(f'Model {model_type} does not support sentence pairs')
-    #if is_sentence_pair and model_type == 'xlnet':
-    #    raise NotImplementedError("Sentence-pair inputs for XLNet not currently supported.")
+    if not sentence_a:
+        raise ValueError("Sentence A is required")
+    is_sentence_pair = bool(sentence_b)
+    if is_sentence_pair and model_type not in ('bert', 'roberta', 'xlnet'):
+        raise ValueError(f'Model {model_type} does not support sentence pairs')
+    if is_sentence_pair and model_type == 'xlnet':
+        raise NotImplementedError("Sentence-pair inputs for XLNet not currently supported.")
 
     # Prepare inputs to model
     tokens_a = None
