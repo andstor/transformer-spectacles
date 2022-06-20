@@ -34,7 +34,7 @@ import torch
 from IPython.core.display import display, HTML, Javascript
 
 
-def show(model, model_type, tokenizer, sentence_a, sentence_b=None, display_mode='dark', layer=None, head=None,
+def show(model, model_type, tokenizer, sentence_a, sentence_b=None, display_mode='dark', bidirectional=True, layer=None, head=None,
          html_action='view'):
 
     if sentence_b:
@@ -66,10 +66,6 @@ def show(model, model_type, tokenizer, sentence_a, sentence_b=None, display_mode
     __location__ = os.path.realpath(
         os.path.join(os.getcwd(), os.path.dirname(__file__)))
     attn_data = get_attention(model, model_type, tokenizer, sentence_a, sentence_b, include_queries_and_keys=True)
-    if model_type == 'gpt2':
-        bidirectional = False
-    else:
-        bidirectional = True
     params = {
         'attention': attn_data,
         'default_filter': "all",
